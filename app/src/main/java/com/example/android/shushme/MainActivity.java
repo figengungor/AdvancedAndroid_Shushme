@@ -21,6 +21,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+// Create a Project and Get a key to use Google APIs
+// Enable Google Places API for Android from console
+// https://console.developers.google.com/flows/enableapi?apiid=placesandroid&reusekey=true
+
+// Google Play Services APIs => https://developers.google.com/android/guides/setup
+// Places API => https://developers.google.com/places/android-api/reference
+// Location API => https://developer.android.com/reference/android/location/Location.html
+
 public class MainActivity extends AppCompatActivity {
 
     // Constants

@@ -2,12 +2,29 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.shushme">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- ACCESS_COARSE_LOCATION
+    Gives you permission to access the device's location using only network provider
+    information from cell towers and Wi-Fi.-->
+
+    <!--  ACCESS_FINE_LOCATION
+     Gives you permission to request GPS satellite location information for more specific location,
+     hence the fine.-->
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB0NiyWvXuqgSg8yUHjIfOujCctKPzhNoI" />
+
         <activity android:name="com.example.android.shushme.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +35,7 @@
         <provider
             android:name="com.example.android.shushme.provider.PlaceContentProvider"
             android:authorities="com.example.android.shushme"
-            android:exported="false"/>
+            android:exported="false" />
 
     </application>
 
