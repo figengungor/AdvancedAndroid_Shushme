@@ -8,4 +8,5 @@
     <string name="location_permission_not_enabled_message">You need to enable location permission first!</string>
     <string name="location_permission_enabled_message">Location permission granted!</string>
     <string name="location_permission">Location permission</string>
+    <string name="geofence_setting_enabled_key">geofenceSetting</string>
 </resources>
