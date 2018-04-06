@@ -21,6 +21,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -31,6 +32,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             Log.e(TAG, String.format("Google Play Services Not Available [%s]", e.getMessage()));
         } catch (GooglePlayServicesNotAvailableException e) {
             Log.e(TAG, String.format("Google Play Services Not Available [%s]", e.getMessage()));
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.e(TAG, String.format("PlacePicker Exception [%s]", e.getMessage()));
         }
         startActivityForResult(i, PLACE_PICKER_REQUEST);
@@ -134,9 +136,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK){
+        if (requestCode == PLACE_PICKER_REQUEST && resultCode == RESULT_OK) {
             Place place = PlacePicker.getPlace(this, data);
-            if(place == null){
+            if (place == null) {
                 Log.i(TAG, "onActivityResult: No Place Selected");
                 return;
             }
@@ -197,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         Log.e(TAG, "onConnectionFailed: API Client Connection Failed!");
     }
 
-    public void refreshPlacesData(){
+    public void refreshPlacesData() {
         Cursor data = getContentResolver().query(
                 PlaceContract.PlaceEntry.CONTENT_URI,
                 null,
@@ -205,10 +207,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 null,
                 null);
 
-        if(data == null || data.getCount() == 0) return;
+        if (data == null || data.getCount() == 0) return;
 
         List<String> guids = new ArrayList<String>();
-        while(data.moveToNext()){
+        while (data.moveToNext()) {
             guids.add(data.getString(data.getColumnIndex(PlaceContract.PlaceEntry.COLUMN_PLACE_ID)));
         }
 
@@ -234,5 +236,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             }
         });
 
+    }
+
+    public void openGooglePrivacyPolicyLink(View view) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://policies.google.com/privacy"));
+        startActivity(intent);
     }
 }
