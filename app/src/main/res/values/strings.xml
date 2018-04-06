@@ -7,6 +7,10 @@
     <string name="enable_geofences">Enable Geofences</string>
     <string name="location_permission_not_enabled_message">You need to enable location permission first!</string>
     <string name="location_permission_enabled_message">Location permission granted!</string>
-    <string name="location_permission">Location permission</string>
+    <string name="location_permission">Location Permission</string>
     <string name="geofence_setting_enabled_key">geofenceSetting</string>
+    <string name="ringer_permission">Ringer Permission</string>
+    <string name="silent_mode_activated">Silent mode activated</string>
+    <string name="touch_to_relaunch">Touch to launch the app.</string>
+    <string name="back_to_normal">Back to normal</string>
 </resources>

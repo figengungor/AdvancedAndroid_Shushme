@@ -17,13 +17,16 @@ package com.example.android.shushme;
 */
 
 import android.Manifest;
+import android.app.NotificationManager;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -187,6 +190,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             locationPermissionCheckbox.setChecked(true);
             locationPermissionCheckbox.setEnabled(false);
         }
+
+        //Initialize ringer permissions checkbox
+        CheckBox ringerPermission = findViewById(R.id.ringer_permission_checkbox);
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        //Check if the API supports such permission change and check if permission is granted
+        if(Build.VERSION.SDK_INT>= 24 && !nm.isNotificationPolicyAccessGranted()){
+            ringerPermission.setChecked(false);
+        } else {
+            ringerPermission.setChecked(true);
+            ringerPermission.setEnabled(false);
+        }
+
     }
 
     public void onLocationPermissionClicked(View view) {
@@ -260,6 +275,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     public void openGooglePrivacyPolicyLink(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://policies.google.com/privacy"));
+        startActivity(intent);
+    }
+
+    /*This intent launches a new built-in activity that allows the user to turn RingerMode permissions
+    on or off for their apps. Once the user turns that on, they can then press back and continue
+    to use the app.
+
+    To make sure our checkbox is always reflecting the correct permission status we need to
+    initialize its state in onResume.*/
+    public void onRingerPermissionClicked(View view) {
+        Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
         startActivity(intent);
     }
 }
